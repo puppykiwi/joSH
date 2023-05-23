@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <ctype.h>
 #define DEFAULT_BUFFER_SIZE 1024
 
 char* inputBuffer; 
@@ -26,10 +27,9 @@ int main(int argc, char* argv[]){
    // interactive mode
     while(prompt){
         printf("joSH > ");
-        fgets(inputBuffer, sizeof(inputBuffer), stdin);
-        if (strncmp(inputBuffer, "exit", 4) == 0){prompt = false;}
+        fgets(inputBuffer, DEFAULT_BUFFER_SIZE, stdin);
+        if ((strncmp(inputBuffer, "exit", 4) == 0) || (strncmp(inputBuffer, "q", 1) == 0)){prompt = false;}
         else{printf("You entered: %s", inputBuffer);}
-
     }
     printf("%s", inputBuffer);
 
