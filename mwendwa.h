@@ -6,6 +6,9 @@
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #define DEFAULT_BUFFER_SIZE 1000
 #define MAX_NUM_ARGS 20
@@ -19,5 +22,6 @@ char* args[MAX_NUM_ARGS];
 // function prototypes
 char* getInput(bool prompt,char* inputBuffer);
 void parseInput(char* inputBuffer, char* args[]);
+void execute(char* args[]);
 
 #endif

@@ -2,18 +2,17 @@
 
 // return shell input into the buffer
 char* getInput(bool prompt,char* inputBuffer){
-    while(prompt){
-        printf("joSH > ");
-        fgets(inputBuffer, DEFAULT_BUFFER_SIZE, stdin);
-        if ((strncmp(inputBuffer, "exit", 4) == 0) || (strncmp(inputBuffer, "q", 1) == 0)){prompt = false;}
-        else{printf("You entered: %s", inputBuffer);}
-    }
-    return inputBuffer;
+    
+    printf("\njoSH > ");
+    fgets(inputBuffer, DEFAULT_BUFFER_SIZE, stdin);
+    
+    //else{printf("You entered: %s", inputBuffer);} // for testing purposes
+    if(inputBuffer != NULL){return inputBuffer;}
+    else{printf("Error: inputBuffer is NULL\n"); return NULL;}
 }
 
 // parse the input buffer into tokens
 void parseInput(char* inputBuffer, char* args[]) {
-    // Remove newline character
     inputBuffer[strcspn(inputBuffer, "\n")] = '\0';
 
     char* token = strtok(inputBuffer, " ");
@@ -28,10 +27,31 @@ void parseInput(char* inputBuffer, char* args[]) {
         token = strtok(NULL, " ");
         numArgs++;
     }
-
-    args[numArgs] = NULL; // Set the last element of the args array to NULL for execvp()
+    args[numArgs] = NULL;
+    
+    if (args == NULL) {
+        printf("Error: args is NULL\n");
+    }
 }
 
+void execute(char* args[]){
+    int pid = fork();
+    if (pid < 0){fprintf(stderr,"ERROR: Fork failed\n");}
+
+    else if (pid == 0){
+        //printf("** Child process created **\n"); // for testing purposes
+        if (execvp(args[0], args) < 0){
+            fprintf(stderr,"ERROR: execvp failed\n");
+            exit(1);
+            }
+    }
+
+    else {
+        //printf("** Parent process waiting for completion **\n"); // for testing purposes
+        wait(NULL);
+        //printf("** Child process completed **\n"); // for testing purposes
+    }
+}
 
 int main(int argc, char* argv[]){
 
@@ -49,16 +69,15 @@ int main(int argc, char* argv[]){
         }
     }
     */
-   
-    inputBuffer = getInput(prompt, inputBuffer); // return input into the buffer
+    while (prompt){
+        inputBuffer = getInput(prompt, inputBuffer); // return input into the buffer
+        if ((strncmp(inputBuffer, "exit", 4) == 0) || (strncmp(inputBuffer, "q", 1) == 0)){prompt = false;}
 
-    parseInput(inputBuffer, args); // parse the input buffer into args[]
-
-
-    for (int i = 0; args[i] != NULL; i++){
-        printf("args[%d]: %s\n",i, args[i]);
-
+        parseInput(inputBuffer, args); // parse the input buffer into args[]
+        
+        execute(args);
     }
+
     free(inputBuffer);
     return 0;
 }
