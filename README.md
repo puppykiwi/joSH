@@ -1,4 +1,16 @@
 joSH
-# Johnray shell v0.1
+# Johnray shell v1.0
 
 A custom interactive shell written in C.
+
+To-Do:
+- keyboard interrupt handling
+- tab completion
+- history
+- aliases
+- scripting
+- piping
+- redirection
+- background processes
+- colors
+- POSIX compliance for fish intergration
