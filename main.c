@@ -1,28 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-#include <ctype.h>
-
-#define DEFAULT_BUFFER_SIZE 1000
-#define MAX_NUM_ARGS 20
-#define MAX_ARG_LEN 20
-
-// global variables
-char* inputBuffer; 
-bool prompt = true;
-char* args[MAX_NUM_ARGS];
+#include "mwendwa.h"
 
 // return shell input into the buffer
 char* getInput(bool prompt,char* inputBuffer){
-
-    // interactive mode
-    //while(prompt){
+    while(prompt){
         printf("joSH > ");
         fgets(inputBuffer, DEFAULT_BUFFER_SIZE, stdin);
         if ((strncmp(inputBuffer, "exit", 4) == 0) || (strncmp(inputBuffer, "q", 1) == 0)){prompt = false;}
         else{printf("You entered: %s", inputBuffer);}
-    //}
+    }
     return inputBuffer;
 }
 
