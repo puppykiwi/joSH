@@ -1,5 +1,5 @@
-joSH
-# Johnray shell v1.0
+# joSH - Johnray shell
+v1.0
 
 A custom interactive shell written in C.
 
