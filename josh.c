@@ -11,7 +11,7 @@ char* getInput(bool prompt,char* inputBuffer){
     else{printf("Error: inputBuffer is NULL\n"); return NULL;}
 }
 
-// parse the input buffer into tokens
+// parse the input buffer into args[]
 void parseInput(char* inputBuffer, char* args[]) {
     inputBuffer[strcspn(inputBuffer, "\n")] = '\0';
 
@@ -34,6 +34,7 @@ void parseInput(char* inputBuffer, char* args[]) {
     }
 }
 
+// execute the command in args[]
 void execute(char* args[]){
     int pid = fork();
     if (pid < 0){fprintf(stderr,"ERROR: Fork failed\n");}
@@ -78,6 +79,6 @@ int main(int argc, char* argv[]){
         execute(args);
     }
 
-    free(inputBuffer);
+    cleanup();
     return 0;
 }

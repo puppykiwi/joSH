@@ -23,5 +23,14 @@ char* args[MAX_NUM_ARGS];
 char* getInput(bool prompt,char* inputBuffer);
 void parseInput(char* inputBuffer, char* args[]);
 void execute(char* args[]);
+void cleanup(void);
+
+//free memory
+void cleanup(void){
+    free(inputBuffer);
+    for (int i = 0; i < MAX_NUM_ARGS; i++){
+        free(args[i]);
+    }
+}
 
 #endif
