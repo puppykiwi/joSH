@@ -4,7 +4,6 @@ v1.0
 A custom interactive shell written in C.
 
 To-Do:
-- handle built-in commands
 - signal handling
 - history & tab completion
 - scripting
