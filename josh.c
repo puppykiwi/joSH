@@ -41,10 +41,23 @@ void execute(char* args[]){
 
     else if (pid == 0){
         //printf("** Child process created **\n"); // for testing purposes
-        if (execvp(args[0], args) < 0){
-            fprintf(stderr,"ERROR: execvp failed\n");
-            exit(1);
-            }
+
+        if(strncmp(args[0],"cd", 2) == 0){
+            if (args[1] == NULL){fprintf(stderr,"ERROR: Dir not found\n");}
+            else if(chdir(args[1]) != 0){fprintf(stderr,"ERROR: chdir failed\n");} 
+            printf("Directory changed to %s\n", args[1]);
+        }
+
+        else if (strncmp(args[0],"exit",4) == 0){
+            exit(0);
+        }
+        
+        else{
+            if (execvp(args[0], args) < 0);{
+                fprintf(stderr,"ERROR: execvp failed\n");
+                exit(1);
+                }
+        }
     }
 
     else {
@@ -55,6 +68,7 @@ void execute(char* args[]){
 }
 
 int main(int argc, char* argv[]){
+    printf("Welcome to joSH!\n"); //banner
 
     inputBuffer = (char*)malloc(sizeof(char) * DEFAULT_BUFFER_SIZE);
     // scanf("%s", inputBuffer); // for testing purposes
@@ -72,7 +86,7 @@ int main(int argc, char* argv[]){
     */
     while (prompt){
         inputBuffer = getInput(prompt, inputBuffer); // return input into the buffer
-        if ((strncmp(inputBuffer, "exit", 4) == 0) || (strncmp(inputBuffer, "q", 1) == 0)){prompt = false;}
+        //if ((strncmp(inputBuffer, "exit", 4) == 0) || (strncmp(inputBuffer, "q", 1) == 0)){prompt = false;}
 
         parseInput(inputBuffer, args); // parse the input buffer into args[]
         
