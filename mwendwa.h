@@ -33,4 +33,9 @@ void cleanup(void){
     }
 }
 
+//clear the screen
+void clearScreen() {
+    printf("\033[2J\033[H"); // ANSI escape code
+}
+
 #endif
