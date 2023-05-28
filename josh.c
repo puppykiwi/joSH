@@ -3,12 +3,12 @@
 // return shell input into the buffer
 char* getInput(bool prompt,char* inputBuffer){
     
-    printf("\njoSH > ");
+    printf(MAGENTA "\n joSH > "RESET);
     fgets(inputBuffer, DEFAULT_BUFFER_SIZE, stdin);
     
     //else{printf("You entered: %s", inputBuffer);} // for testing purposes
     if(inputBuffer != NULL){return inputBuffer;}
-    else{printf("Error: inputBuffer is NULL\n"); return NULL;}
+    else{printf(RED"Error: inputBuffer is NULL\n"RESET); return NULL;}
 }
 
 // parse the input buffer into args[]
@@ -30,21 +30,21 @@ void parseInput(char* inputBuffer, char* args[]) {
     args[numArgs] = NULL;
     
     if (args == NULL) {
-        printf("Error: args is NULL\n");
+        printf(RED"Error: args is NULL\n"RESET);
     }
 }
 
 // execute the command in args[]
 void execute(char* args[]){
     int pid = fork();
-    if (pid < 0){fprintf(stderr,"ERROR: Fork failed\n");}
+    if (pid < 0){fprintf(stderr,RED"ERROR: Fork failed\n"RESET);}
 
     else if (pid == 0){
         //printf("** Child process created **\n"); // for testing purposes
 
         if(strncmp(args[0],"cd", 2) == 0){
-            if (args[1] == NULL){fprintf(stderr,"ERROR: Dir not found\n");}
-            else if(chdir(args[1]) != 0){fprintf(stderr,"ERROR: chdir failed\n");}
+            if (args[1] == NULL){fprintf(stderr,RED"ERROR: Dir not found\n"RESET);}
+            else if(chdir(args[1]) != 0){fprintf(stderr,RED"ERROR: chdir failed\n"RESET);}
             printf("Directory changed to %s\n", args[1]);
         }
 
@@ -58,7 +58,7 @@ void execute(char* args[]){
         
         else{
             if (execvp(args[0], args) < 0);{
-                fprintf(stderr,"ERROR: execvp failed\n");
+                fprintf(stderr,RED"ERROR: execvp failed\n"RESET);
                 exit(1);
                 }
         }
