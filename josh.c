@@ -43,16 +43,9 @@ void execute(char* args[]){
         //printf("** Child process created **\n"); // for testing purposes
 
         if(strncmp(args[0],"cd", 2) == 0){
-            char* tempstring[10];
-            tempstring[0] = "ls";
-            tempstring[1] = NULL;
-            tempstring[2] = args[1];
-            tempstring[3] = NULL;
             if (args[1] == NULL){fprintf(stderr,"ERROR: Dir not found\n");}
-            else if(chdir(args[1]) != 0){fprintf(stderr,"ERROR: chdir failed\n");} 
-            if(execvp(tempstring[0],tempstring) < 0){printf("ERROR: execvp failed\n");}
+            else if(chdir(args[1]) != 0){fprintf(stderr,"ERROR: chdir failed\n");}
             printf("Directory changed to %s\n", args[1]);
-            
         }
 
         else if (strncmp(args[0],"exit",4) == 0){

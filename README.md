@@ -5,7 +5,8 @@ A custom interactive shell written in C.
 
 To-Do:
 - signal handling
-- history & tab completion
+- history
+- tab completion
 - scripting
 - piping & redirection
 - background processes

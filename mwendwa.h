@@ -13,6 +13,13 @@
 #define DEFAULT_BUFFER_SIZE 1000
 #define MAX_NUM_ARGS 20
 #define MAX_ARG_LEN 20
+#define RED     "\x1b[31m"
+#define GREEN   "\x1b[32m"
+#define YELLOW  "\x1b[33m"
+#define BLUE    "\x1b[34m"
+#define MAGENTA "\x1b[35m"
+#define CYAN    "\x1b[36m"
+#define RESET   "\x1b[0m"
 
 // global variables
 char* inputBuffer; 
