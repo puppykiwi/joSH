@@ -50,6 +50,8 @@ void execute(char* args[]){
 
         else if (strncmp(args[0],"exit",4) == 0){
             exit(0);
+            prompt = false;
+
         }
 
         else if(strncmp(args[0],"clear",5) == 0){
@@ -75,27 +77,20 @@ int main(int argc, char* argv[]){
     printf("Welcome to joSH!\n"); //banner
 
     inputBuffer = (char*)malloc(sizeof(char) * DEFAULT_BUFFER_SIZE);
-    // scanf("%s", inputBuffer); // for testing purposes
+    CommandHistory history;
+    initCommandHistory(&history);
 
-    //TODO: Get argv mode to work
-    //pass all arguments to the input buffer or enter interactive mode 
-    /*
-    if (argc < 2){printf("No arguments were passed. \n");}
-    else{
-        for(int i=0; i < argc; i++){
-            char *temp = argv[i];
-            fgets(inputBuffer, sizeof(inputBuffer), *temp);
-        }
-    }
-    */
     while (prompt){
         inputBuffer = getInput(prompt, inputBuffer); // return input into the buffer
-        //if ((strncmp(inputBuffer, "exit", 4) == 0) || (strncmp(inputBuffer, "q", 1) == 0)){prompt = false;}
 
         parseInput(inputBuffer, args); // parse the input buffer into args[]
+        if (strncmp(args[0],"exit",4) == 0){break;} // exit the shell"))
         
         execute(args);
+        for (int i = 0; args[i] != NULL; i++) {addCommand(&history, args[i]);}
     }
+    printf("\nCommand history:\n");
+    printCommandHistory(&history);
 
     cleanup();
     return 0;

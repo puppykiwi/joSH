@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "mwendwa.h"
 
 #define MAX_HISTORY_SIZE 10
 #define MAX_COMMAND_LENGTH 100
