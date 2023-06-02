@@ -91,12 +91,12 @@ int main(int argc, char* argv[]){
 
         parseInput(inputBuffer, args); // parse the input buffer into args[]
         if (strncmp(args[0],"exit",4) == 0){break;} // exit the shell"))
+        if (strncmp(args[0],"history",7) == 0 || strncmp(args[0],"hst",3) == 0){printf("Command History: \n");printCommandHistory(&history);} // print the command history
         
         execute(args);
         if (validCommand = true){for (int i=0; args[i] != NULL; i++){addCommand(&history, args[i]);}}
     }
-    printf("\nCommand history:\n");
-    printCommandHistory(&history);
+    
 
     cleanup();
     return 0;
