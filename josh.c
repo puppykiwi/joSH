@@ -36,6 +36,12 @@ void parseInput(char* inputBuffer, char* args[]) {
 
 // execute the command in args[]
 void execute(char* args[]){
+    
+    if (strncmp(args[0],"exit",4) == 0){
+            prompt = false;
+            exit(1);
+        }
+
     int pid = fork();
     if (pid < 0){fprintf(stderr,RED"ERROR: Fork failed\n"RESET);}
 
@@ -48,16 +54,10 @@ void execute(char* args[]){
             printf("Directory changed to %s\n", args[1]);
         }
 
-        else if (strncmp(args[0],"exit",4) == 0){
-            exit(0);
-            prompt = false;
-
-        }
-
         else if(strncmp(args[0],"clear",5) == 0){
             clearScreen();
         }
-        
+
         else{
             
             if (execvp(args[0], args) < 0){
@@ -90,8 +90,6 @@ int main(int argc, char* argv[]){
         inputBuffer = getInput(prompt, inputBuffer); // return input into the buffer
 
         parseInput(inputBuffer, args); // parse the input buffer into args[]
-        if (strncmp(args[0],"exit",4) == 0){break;} // exit the shell"))
-        if (strncmp(args[0],"history",7) == 0 || strncmp(args[0],"hst",3) == 0){printf("Command History: \n");printCommandHistory(&history);} // print the command history
         
         execute(args);
         if (validCommand = true){for (int i=0; args[i] != NULL; i++){addCommand(&history, args[i]);}}
