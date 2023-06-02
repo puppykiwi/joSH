@@ -33,6 +33,7 @@ typedef struct {
 char* inputBuffer; 
 bool prompt = true;
 char* args[MAX_NUM_ARGS];
+bool validCommand = false;
 
 // function prototypes
 char* getInput(bool prompt,char* inputBuffer);

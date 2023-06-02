@@ -59,9 +59,15 @@ void execute(char* args[]){
         }
         
         else{
-            if (execvp(args[0], args) < 0);{
+            
+            if (execvp(args[0], args) < 0){
+                validCommand = false;
                 fprintf(stderr,RED"ERROR: execvp failed\n"RESET);
                 exit(1);
+                }
+
+            else{
+                validCommand = true;
                 }
         }
     }
@@ -87,7 +93,7 @@ int main(int argc, char* argv[]){
         if (strncmp(args[0],"exit",4) == 0){break;} // exit the shell"))
         
         execute(args);
-        for (int i = 0; args[i] != NULL; i++) {addCommand(&history, args[i]);}
+        if (validCommand = true){for (int i=0; args[i] != NULL; i++){addCommand(&history, args[i]);}}
     }
     printf("\nCommand history:\n");
     printCommandHistory(&history);
