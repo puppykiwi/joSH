@@ -43,6 +43,11 @@ void execute(char* args[], CommandHistory history){
             exit(1);
         }
 
+    else if(strncmp(args[0],"history",7) == 0 || strncmp(args[0],"hst",3) == 0){
+        printf("Command history: \n");
+        printCommandHistory(&history);
+        
+    }
 
     int pid = fork();
     if (pid < 0){fprintf(stderr,RED"ERROR: Fork failed\n"RESET);}
