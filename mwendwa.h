@@ -38,7 +38,7 @@ bool validCommand = false;
 // function prototypes
 char* getInput(bool prompt,char* inputBuffer);
 void parseInput(char* inputBuffer, char* args[]);
-void execute(char* args[]);
+void execute(char* args[], CommandHistory history);
 void cleanup(void);
 
 //free memory

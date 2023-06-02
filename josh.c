@@ -35,12 +35,14 @@ void parseInput(char* inputBuffer, char* args[]) {
 }
 
 // execute the command in args[]
-void execute(char* args[]){
+void execute(char* args[], CommandHistory history){
     
     if (strncmp(args[0],"exit",4) == 0){
+            printCommandHistory(&history);
             prompt = false;
             exit(1);
         }
+
 
     int pid = fork();
     if (pid < 0){fprintf(stderr,RED"ERROR: Fork failed\n"RESET);}
@@ -91,7 +93,7 @@ int main(int argc, char* argv[]){
 
         parseInput(inputBuffer, args); // parse the input buffer into args[]
         
-        execute(args);
+        execute(args, history);
         if (validCommand = true){for (int i=0; args[i] != NULL; i++){addCommand(&history, args[i]);}}
     }
     
