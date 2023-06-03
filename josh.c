@@ -38,7 +38,6 @@ void parseInput(char* inputBuffer, char* args[]) {
 void execute(char* args[], CommandHistory history){
     
     if (strncmp(args[0],"exit",4) == 0){
-            printCommandHistory(&history);
             prompt = false;
             exit(1);
         }
@@ -46,7 +45,6 @@ void execute(char* args[], CommandHistory history){
     else if(strncmp(args[0],"history",7) == 0 || strncmp(args[0],"hst",3) == 0){
         printf("Command history: \n");
         printCommandHistory(&history);
-        
     }
 
     int pid = fork();
@@ -87,7 +85,7 @@ void execute(char* args[], CommandHistory history){
 }
 
 int main(int argc, char* argv[]){
-    printf("Welcome to joSH!\n"); //banner
+    printf(CYAN"Welcome to joSH!\n"RESET); //banner
 
     inputBuffer = (char*)malloc(sizeof(char) * DEFAULT_BUFFER_SIZE);
     CommandHistory history;
