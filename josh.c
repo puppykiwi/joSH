@@ -67,7 +67,7 @@ void execute(char* args[], CommandHistory history){
             
             if (execvp(args[0], args) < 0){
                 validCommand = false;
-                fprintf(stderr,RED"ERROR: execvp failed\n"RESET);
+                fprintf(stderr,RED"ERROR: command %s could not be found.\n"RESET,args[0]);
                 exit(1);
                 }
 
