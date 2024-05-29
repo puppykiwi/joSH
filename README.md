@@ -6,7 +6,7 @@
 
 - **Command Execution**: Execute system commands entered by the user.
 - **Change Directory**: Navigate through directories using the `cd` command.
-- **Command History**: View a history of previously executed commands.
+- **Command History**: View a history of previously executed commands, implemented through a circular buffer.
 - **Clear Screen**: Clear the terminal screen using the `clear` command.
 - **Simple Interface**: Easy-to-use interface resembling a typical shell.
 
