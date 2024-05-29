@@ -1,4 +1,4 @@
-# joSH - A Simple Shell
+# joSH - A Linux Shell
 
 **joSH** is a simple shell program written in C, allowing users to execute commands and navigate the system environment. It provides basic functionalities such as executing commands, changing directories, displaying command history, and clearing the screen.
 
